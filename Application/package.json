@@ -1,12 +1,19 @@
 {
-  "name": "Application",
-  "version": "0.0.1",
-  "private": true,
+  "name": "gatherup-reactnative",
+  "version": "1.0.0",
+  "description": "GatherUp app client developed by Purdue IMS GatherUp team.",
+  "main": "index.js",
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "react": "15.3.2",
-    "react-native": "0.34.0"
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/purdue-epics-ims/GatherUp-ReactNative.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/purdue-epics-ims/GatherUp-ReactNative/issues"
+  },
+  "homepage": "https://github.com/purdue-epics-ims/GatherUp-ReactNative#readme"
 }
