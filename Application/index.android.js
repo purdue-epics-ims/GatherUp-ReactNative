@@ -22,4 +22,5 @@ class Application extends Component {
   }
 }
 
+
 AppRegistry.registerComponent('Application', () => Application);

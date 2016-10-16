@@ -23,7 +23,7 @@ export default class LoginFields extends Component {
 
   render() {
     return (
-      <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
+      <LinearGradient locations = {[0, 1, 2]} colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
       <View style={styles.container}>
         <Text style={styles.welcome}>
           Welcome! Please login to continue.
