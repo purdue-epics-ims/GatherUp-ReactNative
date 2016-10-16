@@ -12,6 +12,8 @@ import {
   View
 } from 'react-native';
 
+import Main from './src/LoginPage';
+
 class Application extends Component {
   render() {
     return (

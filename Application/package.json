@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/purdue-epics-ims/GatherUp-ReactNative/issues"
   },
-  "homepage": "https://github.com/purdue-epics-ims/GatherUp-ReactNative#readme"
+  "homepage": "https://github.com/purdue-epics-ims/GatherUp-ReactNative#readme",
+  "dependencies": {
+    "react-native-linear-gradient": "^1.5.13"
+  }
 }
