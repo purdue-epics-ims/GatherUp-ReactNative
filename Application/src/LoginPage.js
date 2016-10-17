@@ -23,7 +23,6 @@ export default class LoginFields extends Component {
 
   render() {
     return (
-      <LinearGradient locations = {[0, 1, 2]} colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
       <View style={styles.container}>
         <Text style={styles.welcome}>
           Welcome! Please login to continue.
@@ -49,17 +48,12 @@ export default class LoginFields extends Component {
             Submit
           </Text>
         </View>
-
       </View>
-      </LinearGradient>
     );
   }
 };
 
 const styles = StyleSheet.create({
-  linearGradient: {
-      flex: 1,
-  },
   container: {
     flex: 1,
     flexDirection: 'column',
