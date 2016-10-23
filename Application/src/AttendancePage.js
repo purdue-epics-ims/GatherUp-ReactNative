@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Platform,
-  TouchableNativeFeedback,
-  TouchableHighlight,
   StyleSheet,
   Text,
   View,
@@ -14,29 +11,36 @@ import Firebase from 'firebase';
 //import LinearGradient from 'react-native-linear-gradient';
 
 
-export default class LoginFields extends Component {
+export default class AttendancePage extends Component {
 
   render() {
-
-    var TouchableElement = TouchableHighlight;
-    if (Platform.OS === 'android') {
-     TouchableElement = TouchableNativeFeedback;
-    }
-
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome! Please login to continue.
+          Swipe ID or enter manually.
         </Text>
         <TextInput
-          style={{width: 150, textAlign: 'center', alignItems: 'center'}}
-          placeholder = "Login Email"
+          style={{width: 100, textAlign: 'center', alignItems: 'center'}}
+          secureTextEntry = {true}
+          placeholder = "PUID"
+          placeholderTextColor = "black"
+        />
+        <Text>
+          Or:
+        </Text>
+        <TextInput
+          style={{width: 150, textAlign: 'center', alignItems: 'center',}}
+          placeholder = "First Name"
           placeholderTextColor = "black"
         />
         <TextInput
           style={{width: 150, textAlign: 'center', alignItems: 'center',}}
-          secureTextEntry = {true}
-          placeholder = "Password"
+          placeholder = "Last Name"
+          placeholderTextColor = "black"
+        />
+        <TextInput
+          style={{width: 150, textAlign: 'center', alignItems: 'center',}}
+          placeholder = "Email"
           placeholderTextColor = "black"
         />
 
@@ -45,11 +49,9 @@ export default class LoginFields extends Component {
             Submit
           </Text>
         </View>
-
       </View>
     );
   }
-
 };
 
 const styles = StyleSheet.create({

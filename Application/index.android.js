@@ -12,12 +12,14 @@ import {
   View
 } from 'react-native';
 
+import AttendancePage from './src/AttendancePage';
 import LoginFields from './src/LoginPage';
 
 class Application extends Component {
   render() {
     return (
-        <LoginFields />
+      <LoginFields />
+      //<AttendancePage />
     );
   }
 }
