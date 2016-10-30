@@ -11,10 +11,32 @@ import {
 } from'react-native';
 
 import Firebase from 'firebase';
+
+const firebaseConfig = {
+  apiKey: "<your-api-key>",
+  authDomain: "<your-auth-domain>",
+  databaseURL: "<your-database-url>",
+  storageBucket: "<your-storage-bucket>",,
+};
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
 //import LinearGradient from 'react-native-linear-gradient';
 
+// var emailstring = "NULL";
+// var passwordstring = "NULL";
 
 export default class LoginFields extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      emailString: '',
+      passwordString: ''
+    };
+
+  }
+
+
 
   render() {
 
@@ -32,19 +54,28 @@ export default class LoginFields extends Component {
           style={{width: 150, textAlign: 'center', alignItems: 'center'}}
           placeholder = "Login Email"
           placeholderTextColor = "black"
+          onChangeText = {(text) => {this.setState({emailString: text}); console.log(text)}}
         />
         <TextInput
           style={{width: 150, textAlign: 'center', alignItems: 'center',}}
           secureTextEntry = {true}
           placeholder = "Password"
           placeholderTextColor = "black"
+          onChangeText = {(text) => {this.setState({passwordString: text}); console.log(text)}}
         />
 
-        <View style={styles.submitbutton}>
-          <Text style={styles.submittext}>
-            Submit
-          </Text>
-        </View>
+  {/*      <TouchableElement onPress={
+          signInWithEmailAndPassword(this.state.emailString, this.state.passwordString)
+          .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()) {
+
+          }
+        }>*/}
+          <View style={styles.submitbutton}>
+            <Text style={styles.submittext}>
+              Submit
+            </Text>
+          </View>
+      {/*  </TouchableElement>*/}
 
       </View>
     );

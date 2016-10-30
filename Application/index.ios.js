@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 
 import Main from './src/LoginPage';
+import * as firebase from 'firebase';
 
 class Application extends Component {
   render() {
