@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes as PT } from 'react';
 import {
   Platform,
   TouchableNativeFeedback,
@@ -7,18 +7,11 @@ import {
   Text,
   View,
   AppRegistry,
-  TextInput
+  TextInput,
+  AsyncStorage
 } from'react-native';
 
 import Firebase from 'firebase';
-
-const firebaseConfig = {
-  apiKey: "<your-api-key>",
-  authDomain: "<your-auth-domain>",
-  databaseURL: "<your-database-url>",
-  storageBucket: "<your-storage-bucket>",,
-};
-const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 //import LinearGradient from 'react-native-linear-gradient';
 
@@ -26,6 +19,12 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 // var passwordstring = "NULL";
 
 export default class LoginFields extends Component {
+
+  static propTypes = {
+    title: PT.string.isRequired,
+    onForward: PT.func,
+    onBack: PT.func
+  }
 
   constructor(props) {
     super(props);
@@ -64,24 +63,35 @@ export default class LoginFields extends Component {
           onChangeText = {(text) => {this.setState({passwordString: text}); console.log(text)}}
         />
 
-  {/*      <TouchableElement onPress={
-          signInWithEmailAndPassword(this.state.emailString, this.state.passwordString)
-          .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()) {
-
-          }
-        }>*/}
+        <TouchableElement onPress={this.login.bind(this)}>
           <View style={styles.submitbutton}>
             <Text style={styles.submittext}>
               Submit
             </Text>
           </View>
-      {/*  </TouchableElement>*/}
+       </TouchableElement>
 
       </View>
     );
   }
 
-};
+  login(){
+
+    this.props.firebaseApp.auth().signInWithEmailAndPassword(this.state.emailString, this.state.passwordString
+    ).then((userData) =>
+      {
+        alert("Login successful");
+        this.props.onForward;
+      }
+    ).catch((error) =>
+    {
+        alert('L@ogin Failed. Please try again');
+    });
+
+}
+
+}
+
 
 const styles = StyleSheet.create({
   container: {
