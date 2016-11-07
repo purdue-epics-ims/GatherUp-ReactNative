@@ -11,7 +11,6 @@ import {
   AsyncStorage
 } from'react-native';
 
-import Firebase from 'firebase';
 
 //import LinearGradient from 'react-native-linear-gradient';
 
@@ -21,6 +20,7 @@ import Firebase from 'firebase';
 export default class LoginFields extends Component {
 
   static propTypes = {
+    firebaseApp: PT.object.isRequired,
     title: PT.string.isRequired,
     onForward: PT.func,
     onBack: PT.func
@@ -43,6 +43,8 @@ export default class LoginFields extends Component {
     if (Platform.OS === 'android') {
      TouchableElement = TouchableNativeFeedback;
     }
+
+    console.log(this.props.firebaseApp);
 
     return (
       <View style={styles.container}>
@@ -85,7 +87,7 @@ export default class LoginFields extends Component {
       }
     ).catch((error) =>
     {
-        alert('L@ogin Failed. Please try again');
+        alert('Login Failed. Please try again');
     });
 
 }

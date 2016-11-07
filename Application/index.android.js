@@ -42,23 +42,33 @@ class Application extends Component {
           return Navigator.SceneConfigs.FloatFromRight;
         }}
         renderScene={(route, navigator) => {
-          <LoginFields
-            title={routes[0].title}
-            onForward={() => {
-              const nextIndex = route.index + 1;
-              navigator.push({
+          const routeTitle = route.title;
+          if (routeTitle === 'Login Page') {
+            return (
+              <LoginFields
+                firebaseApp={firebaseApp}
+                title={routes[0].title}
+                onForward={() => {
+                  const nextIndex = route.index + 2;
+                  navigator.push({
+                    title: routes[nextIndex].title,
+                    index: nextIndex
+                  });
+                }}
 
-              });
-            }}
-
-            onBack={() => {
-              if (route.index > 0) {
-                navigator.pop();
-              }
-            }}
-            />
-
-      }}
+                onBack={() => {
+                  if (route.index > 0) {
+                    navigator.pop();
+                  }
+                }}
+                />
+            );
+          } else if (routeTitle === 'Attendance Page') {
+            return (
+              <AttendancePage />
+            );
+          }
+        }}
       />
     );
   }
