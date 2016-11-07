@@ -15,6 +15,7 @@ import {
 
 import AttendancePage from './src/AttendancePage';
 import LoginFields from './src/LoginPage';
+import EventListPage from './src/EventListPage'
 import * as firebase from 'firebase';
 
 const firebaseConfig = {
@@ -49,7 +50,7 @@ class Application extends Component {
                 firebaseApp={firebaseApp}
                 title={routes[0].title}
                 onForward={() => {
-                  const nextIndex = route.index + 2;
+                  const nextIndex = route.index + 1;
                   navigator.push({
                     title: routes[nextIndex].title,
                     index: nextIndex
@@ -63,7 +64,29 @@ class Application extends Component {
                 }}
                 />
             );
-          } else if (routeTitle === 'Attendance Page') {
+          }
+          else if (routeTitle === 'Event List') {
+            return (
+              <EventListPage
+                firebaseApp={firebaseApp}
+                title={routes[1].title}
+                onForward={() => {
+                  const nextIndex = route.index + 1;
+                  navigator.push({
+                    title: routes[nextIndex].title,
+                    index: nextIndex
+                  });
+                }}
+
+                onBack={() => {
+                  if (route.index > 0) {
+                    navigator.pop();
+                  }
+                }}
+                 />
+            );
+          }
+          else if (routeTitle === 'Attendance Page') {
             return (
               <AttendancePage />
             );

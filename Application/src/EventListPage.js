@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes as PT } from 'react';
 import {
   Platform,
   TouchableNativeFeedback,
@@ -6,22 +6,27 @@ import {
   StyleSheet,
   Text,
   View,
-  ListView,
   AppRegistry,
   TextInput
 } from'react-native';
 
-import Firebase from 'firebase';
-
+import ListView from 'react-native';
 
 export default class EventListPage extends Component {
+
+  static propTypes = {
+    firebaseApp: PT.object.isRequired,
+    title: PT.string.isRequired,
+    onForward: PT.func,
+    onBack: PT.func
+  }
 
   constructor(props) {
     super(props);
     this.state = {
-      dataSource = new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
+      dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
     };
-    this.itemsRef = firebaseApp.database().ref();
+    this.itemsRef = this.props.firebaseApp.database().ref();
   }
 
   componentDidMount() {
@@ -46,7 +51,7 @@ export default class EventListPage extends Component {
           name: child.val().name,
           description: child.val().description,
           dateID: child.val().dateID,
-          schema: child.val().schema
+          schema: child.val().schema,
           _key: child.key
         });
       });
@@ -58,6 +63,8 @@ export default class EventListPage extends Component {
   }
 
   render() {
+
+    console.log(this.state.dataSource)
 
     var TouchableElement = TouchableHighlight;
     if (Platform.OS === 'android') {

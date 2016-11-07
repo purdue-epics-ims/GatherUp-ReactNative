@@ -44,8 +44,6 @@ export default class LoginFields extends Component {
      TouchableElement = TouchableNativeFeedback;
     }
 
-    console.log(this.props.firebaseApp);
-
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
