@@ -1,4 +1,4 @@
-import React, { Component, PropTypes as PT } from 'react';
+import React, { Component, PropTypes as PT} from 'react';
 import {
   Platform,
   TouchableNativeFeedback,
@@ -7,10 +7,9 @@ import {
   Text,
   View,
   AppRegistry,
-  TextInput
-} from'react-native';
-
-import ListView from 'react-native';
+  TextInput,
+  ListView
+} from 'react-native';
 
 export default class EventListPage extends Component {
 
@@ -26,7 +25,7 @@ export default class EventListPage extends Component {
     this.state = {
       dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
     };
-    this.itemsRef = this.props.firebaseApp.database().ref();
+    this.itemsRef = this.props.firebaseApp.database().ref().child('event');
   }
 
   componentDidMount() {
@@ -35,9 +34,10 @@ export default class EventListPage extends Component {
 
   renderItem(item) {
     return (
-      <TouchableHighlight>
+      <TouchableHighlight style={styles.eventcard} onPress={this.props.onForward(item._key)}>
         <View>
           <Text>{item.name}</Text>
+          <Text>{item.dateID}</Text>
         </View>
       </TouchableHighlight>
     )
@@ -64,8 +64,6 @@ export default class EventListPage extends Component {
 
   render() {
 
-    console.log(this.state.dataSource)
-
     var TouchableElement = TouchableHighlight;
     if (Platform.OS === 'android') {
      TouchableElement = TouchableNativeFeedback;
@@ -74,14 +72,21 @@ export default class EventListPage extends Component {
     return (
       <View style={styles.container}>
         <ListView
-          datasource={this.state.dataSource}
-          renderrow={this.renderItem.bind(this)} />
-      </View>
+          dataSource={this.state.dataSource}
+          renderRow={this.renderItem.bind(this)} />
+     </View>
     );
+
   }
 
 };
 
 const styles = StyleSheet.create({
-
+  eventcard: {
+    width: 100%;
+    borderColor: black;
+    borderWidth: 1;
+    textAlign: center;
+  },
+  
 })
