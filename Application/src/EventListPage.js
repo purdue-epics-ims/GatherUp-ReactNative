@@ -34,7 +34,7 @@ export default class EventListPage extends Component {
 
   renderItem(item) {
     return (
-      <TouchableHighlight style={styles.eventcard} onPress={this.props.onForward(item._key)}>
+      <TouchableHighlight style={styles.eventcard} onPress={this.props.onForward(item._key, item.name)}>
         <View>
           <Text>{item.name}</Text>
           <Text>{item.dateID}</Text>
@@ -79,14 +79,10 @@ export default class EventListPage extends Component {
 
   }
 
-};
+}
 
 const styles = StyleSheet.create({
   eventcard: {
-    width: 100%;
-    borderColor: black;
-    borderWidth: 1;
-    textAlign: center;
+
   },
-  
 })

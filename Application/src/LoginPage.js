@@ -12,10 +12,6 @@ import {
 } from'react-native';
 
 
-//import LinearGradient from 'react-native-linear-gradient';
-
-// var emailstring = "NULL";
-// var passwordstring = "NULL";
 
 export default class LoginFields extends Component {
 
@@ -81,7 +77,7 @@ export default class LoginFields extends Component {
     ).then((userData) =>
       {
         alert("Login successful");
-        this.props.onForward;
+        this.props.onForward();
       }
     ).catch((error) =>
     {

@@ -5,47 +5,38 @@ import {
   Text,
   View,
   AppRegistry,
-  TextInput
+  TextInput,
+  Platform,
+  TouchableNativeFeedback,
+  TouchableHighlight,
+  ListView
 } from'react-native';
 
 import Firebase from 'firebase';
 
-static propTypes = {
-	onBack: PT.func,
-	eventName: PT.string.isRequired
-}
-
-/*const firebaseConfig = {
-  apiKey: "<your-api-key>",
-  authDomain: "<your-auth-domain>",
-  databaseURL: "<your-database-url>",
-  storageBucket: "<your-storage-bucket>",,
-};
-const firebaseApp = firebase.initializeApp(firebaseConfig);*/
-
-const newFirebaseConfig = {
-	apiKey: "AIzaSyBpBEVFlT7PpcPq3ZA_Yj0U6Lq1vQfvq0c",
-	authDomain: "dazzling-inferno-9963.firebaseapp.com",
-	databaseURL: "https://dazzling-inferno-9963.firebaseio.com/event/"+propTypes.eventName+"/attendees", //"https://dazzling-inferno-9963.firebaseio.com",
-	storageBucket: "gs://dazzling-inferno-9963.appspot.com",
-	weE};
-const newFirebaseApp = firebase.initializeApp(newFirebaseConfig); 
-
 export default class AttendancePage extends Component {
+
+  static propTypes = {
+  	onBack: PT.func,
+  }
 
 	constructor(props) {
     super(props);
     this.state = {
-      puidString: '',
-      firstNameString: '',
-	  lastNameString: '',
-	  emailString: ''
+        puidString: '',
+        firstNameString: '',
+	      lastNameString: '',
+	      emailString: ''
     };
-
-	{/*this.itemsRef = firebaseApp.database().ref();
-	}*/}
+  }
 
   render() {
+
+    var TouchableElement = TouchableHighlight;
+    if (Platform.OS === 'android') {
+     TouchableElement = TouchableNativeFeedback;
+    }
+
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -90,7 +81,7 @@ export default class AttendancePage extends Component {
       </View>
     );
   }
-};
+
 
 onPressRegister()
 {
@@ -104,19 +95,21 @@ onPressRegister()
     {
         alert('L@ogin Failed. Please try again');
     });*/}
-	
-	
-	if (this.state.emailString.match(^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$)) { //Matches email 
+
+
+	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.emailString)) {//^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$)) { //Matches email
 		//TODO: add way to verify added email does not exist in existing emails in firebase (user doesn't exist)
 		newFirebaseApp.database().ref().push({
-			puid: this.state.puidString,
-            lastname: this.state.lastNameString,
-            firstname: this.state.firstNameString,
-            email: this.state.email});
-		
-	} else { //Email is not a valid email format
-		alert('Email is not of a valid format. Please try again.');
-	}
+			       puid: this.state.puidString,
+             lastname: this.state.lastNameString,
+             firstname: this.state.firstNameString,
+             email: this.state.email
+          });
+    }
+    else { //Email is not a valid email format
+		    alert('Email is not of a valid format. Please try again.');
+	  }
+}
 }
 
 const styles = StyleSheet.create({
