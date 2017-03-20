@@ -45,14 +45,12 @@ export default class LoginFields extends Component {
         <Text style={styles.welcome}>
           Welcome! Please login to continue.
         </Text>
-        <TextInput
-          style={{width: 150, textAlign: 'center', alignItems: 'center'}}
+        <TextInput style={styles.input}
           placeholder = "Login Email"
           placeholderTextColor = "black"
           onChangeText = {(text) => {this.setState({emailString: text}); console.log(text)}}
-        />
-        <TextInput
-          style={{width: 150, textAlign: 'center', alignItems: 'center',}}
+          />
+        <TextInput style={styles.input}
           secureTextEntry = {true}
           placeholder = "Password"
           placeholderTextColor = "black"
@@ -66,7 +64,6 @@ export default class LoginFields extends Component {
             </Text>
           </View>
        </TouchableElement>
-
       </View>
     );
   }
@@ -102,6 +99,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
     backgroundColor: 'transparent',
+  },
+  input: {
+      width: 150,
+      textAlign: 'center',
+      alignItems: 'center',
   },
   submitbutton: {
     margin: 15,
