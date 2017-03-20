@@ -16,8 +16,8 @@ export default class EventListPage extends Component {
   static propTypes = {
     firebaseApp: PT.object.isRequired,
     title: PT.string.isRequired,
-    onForward: PT.func,
-    onBack: PT.func
+    onForwardEvent: PT.func,
+    onBack: PT.func,
   }
 
   constructor(props) {
@@ -34,7 +34,7 @@ export default class EventListPage extends Component {
 
   renderItem(item) {
     return (
-      <TouchableHighlight onPress={()=>this.props.onForward(item._key, item.name)}>
+      <TouchableHighlight onPress={()=>this.props.onForwardEvent({id: item._key, name: item.name})}>
         <View style={eventstyles.EventListBox}>
           <Text>{item.name}</Text>
           <Text>{item.dateID}</Text>

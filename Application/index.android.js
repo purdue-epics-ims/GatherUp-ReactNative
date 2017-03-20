@@ -21,6 +21,17 @@ const firebaseConfig = {
 const firebaseApp = firebase.initializeApp(firebaseConfig, 'MainFirebase');
 
 class Application extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      event: {id: null, name: null}
+    }
+  };
+
+  updateEvent(event) {
+    this.setState({event: event});
+  };
+
   render() {
 
     const routes = [
@@ -44,7 +55,6 @@ class Application extends Component {
                 firebaseApp={firebaseApp}
                 title={routes[0].title}
                 onForward={() => {
-                  console.log("Forward from login page")
                   const nextIndex = route.index + 1;
                   navigator.push({
                     title: routes[nextIndex].title,
@@ -65,9 +75,9 @@ class Application extends Component {
               <EventListPage
                 firebaseApp={firebaseApp}
                 title={routes[1].title}
-                onForward={()=> {
-                  console.log("Forward from event page")
+                onForwardEvent={(event)=> {
                   const nextIndex = route.index + 1;
+                  this.updateEvent(event);
                   navigator.push({
                     title: routes[nextIndex].title,
                     index: nextIndex
@@ -84,7 +94,19 @@ class Application extends Component {
           }
           else if (routeTitle === 'Attendance Page') {
             return (
-              <AttendancePage />
+              <AttendancePage
+                firebaseApp={firebaseApp}
+                title={routes[2].title}
+                event={this.state.event}
+                onForward={()=> {
+                  }}
+
+                onBack={() => {
+                  if (route.index > 0) {
+                    navigator.pop();
+                  }
+                }}
+              />
             );
           }
         }}

@@ -1,5 +1,4 @@
 import React, { Component, PropTypes as PT } from 'react';
-
 import {
   StyleSheet,
   Text,
@@ -14,16 +13,21 @@ import {
 
 import Firebase from 'firebase';
 
+
+
 export default class AttendancePage extends Component {
 
   static propTypes = {
+    firebaseApp: PT.object.isRequired,
+    title: PT.string.isRequired,
   	onBack: PT.func,
+    event: PT.object.isRequired
   }
 
 	constructor(props) {
     super(props);
     this.state = {
-        puidString: '',
+        puidString: '0000000000',
         firstNameString: '',
 	      lastNameString: '',
 	      emailString: ''
@@ -39,6 +43,14 @@ export default class AttendancePage extends Component {
 
     return (
       <View style={styles.container}>
+        <TouchableElement onPress={()=>this.props.onBack()}>
+          <View style={styles.backbutton}>
+            <Text style={styles.submittext}>
+              Back
+            </Text>
+          </View>
+        </TouchableElement>
+
         <Text style={styles.welcome}>
           Swipe ID or enter manually.
         </Text>
@@ -47,7 +59,7 @@ export default class AttendancePage extends Component {
           secureTextEntry = {true}
           placeholder = "PUID"
           placeholderTextColor = "black"
-		  onChangeText = {(text) => {this.setState({puidString: text})}}
+		      onChangeText = {(text) => {this.setState({puidString: text})}}
         />
         <Text>
           Or:
@@ -56,19 +68,19 @@ export default class AttendancePage extends Component {
           style={{width: 150, textAlign: 'center', alignItems: 'center',}}
           placeholder = "First Name"
           placeholderTextColor = "black"
-		  onChangeText = {(text) => {this.setState({firstNameString: text})}}
+		      onChangeText = {(text) => {this.setState({firstNameString: text})}}
         />
         <TextInput
           style={{width: 150, textAlign: 'center', alignItems: 'center',}}
           placeholder = "Last Name"
           placeholderTextColor = "black"
-		  onChangeText = {(text) => {this.setState({lastNameString: text})}}
+		      onChangeText = {(text) => {this.setState({lastNameString: text})}}
         />
         <TextInput
           style={{width: 150, textAlign: 'center', alignItems: 'center',}}
           placeholder = "Email"
           placeholderTextColor = "black"
-		  onChangeText = {(text) => {this.setState({emailString: text})}}
+		      onChangeText = {(text) => {this.setState({emailString: text})}}
         />
 
         <TouchableElement onPress={this.onPressRegister.bind(this)}>
@@ -83,33 +95,32 @@ export default class AttendancePage extends Component {
   }
 
 
-onPressRegister()
-{
-    {/*this.props.firebaseApp.auth().signInWithEmailAndPassword(this.state.emailString, this.state.passwordString
-    ).then((userData) =>
-      {
-        alert("Login successful");
-        this.props.onForward;
-      }
-    ).catch((error) =>
-    {
-        alert('L@ogin Failed. Please try again');
-    });*/}
-
-
-	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.emailString)) {//^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$)) { //Matches email
+onPressRegister() {
+	 if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.emailString)) {//^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$)) { //Matches email
 		//TODO: add way to verify added email does not exist in existing emails in firebase (user doesn't exist)
-		newFirebaseApp.database().ref().push({
-			       puid: this.state.puidString,
-             lastname: this.state.lastNameString,
-             firstname: this.state.firstNameString,
-             email: this.state.email
-          });
+
+    var newPostKey = this.props.firebaseApp.database().ref().child('event').child(this.props.event.id).child('attendees').push().key;
+
+    const puidtemp = '0000000000'
+
+    var updates = {
+      puid: puidtemp,
+      lastname: this.state.lastNameString,
+      firstname: this.state.firstNameString,
+      email: this.state.emailString
+    };
+
+    var path = {};
+    path['/event/' + this.props.event.id + '/' + 'attendees/' + newPostKey] = updates;
+
+    this.props.firebaseApp.database().ref().update(path);
+
     }
     else { //Email is not a valid email format
 		    alert('Email is not of a valid format. Please try again.');
 	  }
-}
+  }
+  
 }
 
 const styles = StyleSheet.create({
@@ -126,6 +137,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
     backgroundColor: 'transparent',
+  },
+  backbutton: {
+    margin: 15,
+    alignItems: 'center',
+    width: 75,
+    height: 30,
+    borderColor: 'black',
+    borderWidth: 1,
   },
   submitbutton: {
     margin: 15,
