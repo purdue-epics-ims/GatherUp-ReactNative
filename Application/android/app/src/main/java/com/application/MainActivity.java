@@ -1,10 +1,6 @@
 package com.application;
 
-import java.util.List;
-import java.util.Arrays;
 import com.facebook.react.ReactActivity;
-import com.facebook.react.ReactPackage;
-import com.facebook.react.shell.MainReactPackage;
 
 public class MainActivity extends ReactActivity {
 
@@ -15,12 +11,5 @@ public class MainActivity extends ReactActivity {
     @Override
     protected String getMainComponentName() {
         return "Application";
-    };
-
-  //  @Override
-    protected List<ReactPackage> getPackages(){
-      return Arrays.<ReactPackage>asList(
-        new MainReactPackage()
-      );
     }
 }
