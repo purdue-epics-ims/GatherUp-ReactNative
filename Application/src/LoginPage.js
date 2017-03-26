@@ -76,7 +76,6 @@ export default class LoginFields extends Component {
     this.props.firebaseApp.auth().signInWithEmailAndPassword(this.state.emailString, this.state.passwordString
     ).then((userData) =>
       {
-        alert("Login successful");
         this.props.onForward();
       }
     ).catch((error) =>
