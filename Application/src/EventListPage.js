@@ -84,6 +84,8 @@ export default class EventListPage extends Component {
 const eventstyles = StyleSheet.create({
   EventListBox: {
     flex: 1,
-    height: 40,
+    height: 100,
+    borderColor: 'black',
+    borderWidth: 1,
   },
 })
