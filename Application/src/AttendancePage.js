@@ -14,7 +14,6 @@ import {
 import Firebase from 'firebase';
 
 
-
 export default class AttendancePage extends Component {
 
   static propTypes = {
@@ -109,7 +108,7 @@ onPressRegister() {
 
     var newPostKey = this.props.firebaseApp.database().ref().child('event').child(this.props.event.id).child('attendees').push().key;
 
-    const puidtemp = this.state.puidString.includes('0000000000') ? (this.state.emailString.endsWith('purdue.edu') ? '**********' : 'N/A') : (this.state.puidString)
+    const puidtemp = this.state.puidString.includes('000000000') ? (this.state.emailString.endsWith('purdue.edu') ? '**********' : 'N/A') : (this.state.puidString);
 
     var updates = {
       puid: puidtemp,
@@ -123,7 +122,7 @@ onPressRegister() {
 
     this.props.firebaseApp.database().ref().update(path).then((success) =>
       {
-        alert('Attendance recorded successfully!')
+        alert('Attendance recorded successfully!');
       }
       ).catch((error) =>
       {
