@@ -70529,7 +70529,6 @@ var _reactNative=require(44 /* react-native */);
 var _firebase=require(563 /* firebase */);var _firebase2=babelHelpers.interopRequireDefault(_firebase);var
 
 
-
 AttendancePage=function(_Component){babelHelpers.inherits(AttendancePage,_Component);
 
 
@@ -71359,14 +71358,12 @@ _react2.default.createElement(_reactNative.View,{style:styles.container},
 _react2.default.createElement(_reactNative.Text,{style:styles.welcome},'Welcome! Please login to continue.'),
 
 
-_react2.default.createElement(_reactNative.TextInput,{
-style:{width:150,textAlign:'center',alignItems:'center'},
+_react2.default.createElement(_reactNative.TextInput,{style:styles.input,
 placeholder:'Login Email',
 placeholderTextColor:'black',
 onChangeText:function onChangeText(text){_this2.setState({emailString:text});console.log(text);}}),
 
-_react2.default.createElement(_reactNative.TextInput,{
-style:{width:150,textAlign:'center',alignItems:'center'},
+_react2.default.createElement(_reactNative.TextInput,{style:styles.input,
 secureTextEntry:true,
 placeholder:'Password',
 placeholderTextColor:'black',
@@ -71376,7 +71373,6 @@ onChangeText:function onChangeText(text){_this2.setState({passwordString:text});
 _react2.default.createElement(TouchableElement,{onPress:this.login.bind(this)},
 _react2.default.createElement(_reactNative.View,{style:styles.submitbutton},
 _react2.default.createElement(_reactNative.Text,{style:styles.submittext},'Submit')))));
-
 
 
 
@@ -71416,6 +71412,11 @@ fontSize:20,
 textAlign:'center',
 margin:10,
 backgroundColor:'transparent'},
+
+input:{
+width:150,
+textAlign:'center',
+alignItems:'center'},
 
 submitbutton:{
 margin:15,
@@ -71514,7 +71515,9 @@ renderRow:this.renderItem.bind(this)})));
 var eventstyles=_reactNative.StyleSheet.create({
 EventListBox:{
 flex:1,
-height:40}});
+height:100,
+borderColor:'black',
+borderWidth:1}});
 }, "gatherup-reactnative/src/EventListPage.js");
 ;require(201);
 ;require(0);
