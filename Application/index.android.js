@@ -3,9 +3,9 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View,
-  Navigator
+  View
 } from 'react-native';
+import { Navigator } from 'react-native-deprecated-custom-components';
 
 import AttendancePage from './src/AttendancePage';
 import LoginFields from './src/LoginPage';
