@@ -37,7 +37,7 @@ export default class EventListPage extends Component {
       <TouchableHighlight onPress={()=>this.props.onForwardEvent({id: item._key, name: item.name})}>
         <View style={eventstyles.EventListBox}>
           <Text>{item.name}</Text>
-          <Text>{item.dateID}</Text>
+          <Text>{"ID: " + item.dateID}</Text>
         </View>
       </TouchableHighlight>
     )
