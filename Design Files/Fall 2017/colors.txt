@@ -1,0 +1,7 @@
+Accent Color: #22F0DD
+Background Color: #424242
+Dark Background Color: #303030
+
+EventDetails Dark Color: #111111
+Card Color: #212121
+Error Color: #FF3333
