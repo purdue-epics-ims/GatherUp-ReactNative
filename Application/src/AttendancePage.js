@@ -8,7 +8,8 @@ import {
   Platform,
   TouchableNativeFeedback,
   TouchableHighlight,
-  ListView
+  ListView,
+  Image
 } from'react-native';
 
 import Firebase from 'firebase';
@@ -42,10 +43,23 @@ export default class AttendancePage extends Component {
 
     return (
       <View style={styles.container}>
-
-        <Text style={styles.welcome}>
-          Event: {this.props.event.name}
-        </Text>
+       <Image style={styles.backgroundPic}
+          source={require('./icon.png')}
+        />
+		<View style={styles.header}>
+		
+			<Text style={styles.eventTextDate}>
+				{this.props.event.dateID}
+			</Text>
+	  
+			<Text style={styles.eventTextName}>
+			{this.props.event.name}
+			</Text>
+		
+			<Text style={styles.eventTextDesc}>
+			{this.props.event.description}
+			</Text>
+	    </View>
 
         <TouchableElement onPress={()=>this.props.onBack()}>
           <View style={styles.eventbutton}>
@@ -74,7 +88,6 @@ export default class AttendancePage extends Component {
         <TextInput
           style={{width: 150, textAlign: 'center', alignItems: 'center',}}
           placeholder = "First Name"
-          placeholderTextColor = "black"
 		      onChangeText = {(text) => {this.setState({firstNameString: text})}}
         />
         <TextInput
@@ -138,12 +151,33 @@ onPressRegister() {
 }
 
 const styles = StyleSheet.create({
+  header: {
+	flex: .7,
+	width: 420,
+	backgroundColor: 'rgb(33,33,33)',
+  },
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
+    //justifyContent: 'center',
+    //alignItems: 'center',
+    backgroundColor: 'rgb(51,51,51)',
+  },
+  eventTextName: {
+	fontSize: 20,
+	margin: 10,
+	marginRight: 80,
+	color: 'white',
+  },
+  eventTextDesc: {
+	fontSize: 16,
+	color: 'white',
+	margin: 10,
+  },
+  eventTextDate: {
+	fontSize: 16,
+	color: 'white',
+	textAlign: 'right',
   },
   eventbutton: {
     margin: 15,
@@ -178,5 +212,12 @@ const styles = StyleSheet.create({
   },
   submittext: {
     color: 'black',
+  },
+  backgroundPic: {
+	height: 350,
+	width: 490,
+	position: 'absolute',
+	bottom: -10,
+	left: -165,
   },
 })

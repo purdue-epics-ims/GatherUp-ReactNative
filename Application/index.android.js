@@ -42,7 +42,7 @@ class Application extends Component {
 
     return (
       <Navigator
-        initialRoute={routes[0]}
+        initialRoute={routes[2]}
         initialRouteStack={routes}
         configureScene={() => {
           return Navigator.SceneConfigs.FloatFromRight;

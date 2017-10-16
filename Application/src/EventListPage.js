@@ -8,7 +8,8 @@ import {
   View,
   AppRegistry,
   TextInput,
-  ListView
+  ListView,
+  Image
 } from 'react-native';
 
 export default class EventListPage extends Component {
@@ -36,8 +37,9 @@ export default class EventListPage extends Component {
     return (
       <TouchableHighlight onPress={()=>this.props.onForwardEvent({id: item._key, name: item.name})}>
         <View style={eventstyles.EventListBox}>
-          <Text>{item.name}</Text>
-          <Text>{"ID: " + item.dateID}</Text>
+          <Text style = {eventstyles.eventTextDate}>{item.dateID}</Text>
+          <Text style = {eventstyles.eventTextName}>{item.name}</Text>
+          <Text style = {eventstyles.eventTextDesc}>{item.description}</Text>
         </View>
       </TouchableHighlight>
     )
@@ -70,10 +72,16 @@ export default class EventListPage extends Component {
     }
 
     return (
-      <View>
+      <View style={eventstyles.container}>
+		<Image
+          source={require('./icon.png')}
+		  style={eventstyles.backgroundPic}
+        />
         <ListView
+		  style={eventstyles.eventList}
           dataSource={this.state.dataSource}
-          renderRow={this.renderItem.bind(this)} />
+          renderRow={this.renderItem.bind(this)} 
+		/>
      </View>
     );
 
@@ -82,10 +90,46 @@ export default class EventListPage extends Component {
 }
 
 const eventstyles = StyleSheet.create({
+  container: {
+	flex: 1,
+    flexDirection: 'column',
+	justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgb(51,51,51)',
+  },
   EventListBox: {
     flex: 1,
-    height: 100,
-    borderColor: 'black',
+    height: 135,
+	width: 375,
+    borderColor: 'rgb(51,51,51)',
+	backgroundColor: 'rgb(33,33,33)',
     borderWidth: 1,
+	marginBottom: 10,
+	borderRadius: 5,
+  },
+  eventList: {
+	marginTop: 50,
+  },
+  eventTextName: {
+	fontSize: 20,
+	margin: 10,
+	marginRight: 80,
+	color: 'white',
+  },
+  eventTextDesc: {
+	fontSize: 16,
+	color: 'white',
+	margin: 10,
+  },
+  eventTextDate: {
+	fontSize: 16,
+	color: 'white',
+	textAlign: 'right',
+  },
+  backgroundPic: {
+	height: 350,
+	width: 490,
+	position: 'absolute',
+	bottom: -10,
   },
 })

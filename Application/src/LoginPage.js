@@ -43,24 +43,27 @@ export default class LoginFields extends Component {
 
     return (
       <View style={styles.container}>
+	  <Image style={styles.logoPic}
+          source={require('./logo.png')}
+        />
         <TextInput style={styles.input}
           placeholder = "username"
-          placeholderTextColor = 'rgb(38,195,180)'
-		  underlineColorAndroid= 'rgb(38,195,180)'
+          placeholderTextColor = '#22F0DD'
+		  underlineColorAndroid= '#22F0DD'
           onChangeText = {(text) => {this.setState({emailString: text}); console.log(text)}}
           />
         <TextInput style={styles.input}
           secureTextEntry = {true}
           placeholder = "password"
-          placeholderTextColor = 'rgb(38,195,180)'
-		  underlineColorAndroid= 'rgb(38,195,180)'
+          placeholderTextColor = '#22F0DD'
+		  underlineColorAndroid= '#22F0DD'
           onChangeText = {(text) => {this.setState({passwordString: text}); console.log(text)}}
         />
 
         <TouchableElement onPress={this.login.bind(this)}>
           <View style={styles.submitbutton}>
             <Text style={styles.submittext}>
-              Submit
+              Log In
             </Text>
           </View>
        </TouchableElement>
@@ -92,12 +95,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    //justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgb(51,51,51)',
   },
   welcome: {
-    color: 'rgb(38,195,180)',
+    color: '#22F0DD',
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
@@ -114,7 +116,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 	borderColor: 'rgb(51,51,51)',
     borderWidth: 1,
-	backgroundColor: 'rgb(38,195,180)',
+	backgroundColor: '#22F0DD',
 	width:150,
 	height:50,
 	justifyContent: 'center',
@@ -122,16 +124,20 @@ const styles = StyleSheet.create({
   },
   submittext: {
 	fontSize: 20,
-	color: 'white',
+	color: 'rgb(51,51,51)',
+  },
+  logoPic: {
+	  height: 160,
+	  width: 160,
+	  margin: 15,
   },
   backgroundPic: {
 	  alignSelf: 'stretch',
       alignItems: 'flex-start',
-	  marginLeft: 165,
+	  marginLeft: 95,
 	  position: 'absolute',
-	  bottom: 0,
+	  bottom: -10,
 	  height: 350,
-	  width: 350,
-	  
+	  width: 490,
   },
 })
