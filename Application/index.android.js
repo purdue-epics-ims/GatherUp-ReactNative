@@ -80,7 +80,8 @@ class Application extends Component {
                   this.updateEvent(event);
                   navigator.push({
                     title: routes[nextIndex].title,
-                    index: nextIndex
+                    index: nextIndex,
+					event
                   });
                 }}
 

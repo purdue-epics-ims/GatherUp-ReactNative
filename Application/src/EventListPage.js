@@ -34,8 +34,11 @@ export default class EventListPage extends Component {
   }
 
   renderItem(item) {
+	  console.log("EventListPage")
+	  console.log(item.event)
     return (
-      <TouchableHighlight onPress={()=>this.props.onForwardEvent({id: item._key, name: item.name})}>
+      //<TouchableHighlight onPress={()=>this.props.onForwardEvent({id: item._key, name: item.name, event: item.event})}>
+	  <TouchableHighlight onPress={()=>this.props.onForwardEvent(item)}>
         <View style={eventstyles.EventListBox}>
           <Text style = {eventstyles.eventTextDate}>{item.dateID}</Text>
           <Text style = {eventstyles.eventTextName}>{item.name}</Text>

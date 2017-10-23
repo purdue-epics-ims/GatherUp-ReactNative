@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
 	  alignSelf: 'center',
       alignItems: 'center',
 	  fontSize: 20,
+	  color: '#22F0DD',
   },
   submitbutton: {
     margin: 15,
