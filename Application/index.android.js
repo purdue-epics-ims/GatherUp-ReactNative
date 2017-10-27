@@ -42,7 +42,7 @@ class Application extends Component {
 
     return (
       <Navigator
-        initialRoute={routes[2]}
+        initialRoute={routes[0]}
         initialRouteStack={routes}
         configureScene={() => {
           return Navigator.SceneConfigs.FloatFromRight;
@@ -53,7 +53,7 @@ class Application extends Component {
             return (
               <LoginFields
                 firebaseApp={firebaseApp}
-                title={routes[0].title}
+                title={routes[1].title}
                 onForward={() => {
                   const nextIndex = route.index + 1;
                   navigator.push({

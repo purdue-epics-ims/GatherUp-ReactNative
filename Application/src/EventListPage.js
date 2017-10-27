@@ -11,6 +11,7 @@ import {
   ListView,
   Image
 } from 'react-native';
+import moment from 'moment';
 
 export default class EventListPage extends Component {
 
@@ -37,10 +38,9 @@ export default class EventListPage extends Component {
 	  console.log("EventListPage")
 	  console.log(item.event)
     return (
-      //<TouchableHighlight onPress={()=>this.props.onForwardEvent({id: item._key, name: item.name, event: item.event})}>
-	  <TouchableHighlight onPress={()=>this.props.onForwardEvent(item)}>
+      <TouchableHighlight onPress={()=>this.props.onForwardEvent({id: item._key, name: item.name, event: item.event, dateID: item.dateID, description: item.description})}>
         <View style={eventstyles.EventListBox}>
-          <Text style = {eventstyles.eventTextDate}>{item.dateID}</Text>
+          <Text style = {eventstyles.eventTextDate}>{moment(item.dateID).format('MM/DD/YYYY')}</Text>
           <Text style = {eventstyles.eventTextName}>{item.name}</Text>
           <Text style = {eventstyles.eventTextDesc}>{item.description}</Text>
         </View>
@@ -128,6 +128,7 @@ const eventstyles = StyleSheet.create({
 	fontSize: 16,
 	color: 'white',
 	textAlign: 'right',
+	right: 5,
   },
   backgroundPic: {
 	height: 350,

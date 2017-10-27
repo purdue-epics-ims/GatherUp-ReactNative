@@ -11,6 +11,7 @@ import {
   ListView,
   Image
 } from'react-native';
+import moment from 'moment';
 
 import Firebase from 'firebase';
 
@@ -26,10 +27,15 @@ export default class AttendancePage extends Component {
 
 	constructor(props) {
     super(props);
+	this.state = {
+		puidString: '0000000000',
+		firstNameString: '',
+		lastNameString: '',
+		emailString: ''
+	}
 	console.log("AttendancePage")
 	console.log(this.props.event)
   }
-
   render() {
 
     var TouchableElement = TouchableHighlight;
@@ -38,14 +44,15 @@ export default class AttendancePage extends Component {
     }
 
     return (
+	
       <View style={styles.container}>
         <Image style={styles.backgroundPic}
           source={require('./icon.png')}
         />
 		<View style={styles.header}>
-		
+	  
 			<Text style={styles.eventTextDate}>
-			{this.props.event.dateID + "\n" + "\n"}
+			{moment(this.props.event.dateID).format('MM/DD/YYYY') + "\n" + "\n"}
 			</Text>
 	  
 			<Text style={styles.eventTextName}>
@@ -90,11 +97,13 @@ export default class AttendancePage extends Component {
 				placeholderTextColor = '#22F0DD'
 				onChangeText = {(text) => {this.setState({emailString: text})}}
 			/>
-			<View style={styles.submitbutton}>
-				<Text style={styles.submittext}>
+			<TouchableElement onPress={this.onPressRegister.bind(this)}>
+				<View style={styles.submitbutton}>
+					<Text style={styles.submittext}>
 					Submit
-				</Text>
-			</View>
+					</Text>
+				</View>
+			</TouchableElement>
 		</View>
         <TouchableElement onPress={()=>this.props.onBack()}>
           <View style={styles.eventbutton}>
@@ -159,17 +168,20 @@ const styles = StyleSheet.create({
 	margin: 10,
 	marginRight: 80,
 	color: 'white',
+	marginLeft: 27,
   },
   eventTextDesc: {
 	fontSize: 16,
 	color: 'white',
 	textAlign: 'left',
 	margin: 10,
+	marginLeft: 27,
   },
   eventTextDate: {
 	fontSize: 16,
 	color: 'white',
 	textAlign: 'right',
+	right: 10,
   },
   eventbutton: {
     margin: 15,
