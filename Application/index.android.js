@@ -53,7 +53,7 @@ class Application extends Component {
             return (
               <LoginFields
                 firebaseApp={firebaseApp}
-                title={routes[0].title}
+                title={routes[1].title}
                 onForward={() => {
                   const nextIndex = route.index + 1;
                   navigator.push({
@@ -80,7 +80,8 @@ class Application extends Component {
                   this.updateEvent(event);
                   navigator.push({
                     title: routes[nextIndex].title,
-                    index: nextIndex
+                    index: nextIndex,
+					event
                   });
                 }}
 

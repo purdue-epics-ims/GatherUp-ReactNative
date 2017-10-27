@@ -8,8 +8,10 @@ import {
   Platform,
   TouchableNativeFeedback,
   TouchableHighlight,
-  ListView
+  ListView,
+  Image
 } from'react-native';
+import moment from 'moment';
 
 import Firebase from 'firebase';
 
@@ -25,14 +27,15 @@ export default class AttendancePage extends Component {
 
 	constructor(props) {
     super(props);
-    this.state = {
-        puidString: '0000000000',
-        firstNameString: '',
-	      lastNameString: '',
-	      emailString: ''
-    };
+	this.state = {
+		puidString: '0000000000',
+		firstNameString: '',
+		lastNameString: '',
+		emailString: ''
+	}
+	console.log("AttendancePage")
+	console.log(this.props.event)
   }
-
   render() {
 
     var TouchableElement = TouchableHighlight;
@@ -41,62 +44,72 @@ export default class AttendancePage extends Component {
     }
 
     return (
+	
       <View style={styles.container}>
-
-        <Text style={styles.welcome}>
-          Event: {this.props.event.name}
-        </Text>
-
+        <Image style={styles.backgroundPic}
+          source={require('./icon.png')}
+        />
+		<View style={styles.header}>
+	  
+			<Text style={styles.eventTextDate}>
+			{moment(this.props.event.dateID).format('MM/DD/YYYY') + "\n" + "\n"}
+			</Text>
+	  
+			<Text style={styles.eventTextName}>
+			{this.props.event.name}
+			</Text>
+		
+			<Text style={styles.eventTextDesc}>
+			{this.props.event.description}
+			</Text>
+	    </View>
+		<View style={styles.floatingBox}>
+			<Text style={styles.welcome}>
+				Swipe PUID{"\n"}
+				or{"\n"}
+				Enter Attendee Information
+			</Text>
+			<TextInput
+				style={{width: 100, textAlign: 'center', alignItems: 'center', color: '#22F0DD'}}
+				secureTextEntry = {true}
+				placeholder = "PUID"
+				placeholderTextColor = '#22F0DD'
+		        onChangeText = {(text) => {this.setState({puidString: text})}}
+			/>
+			<Text style ={{color: '#22F0DD'}}>
+				And / Or:
+			</Text>
+			<TextInput
+				style={{width: 150, textAlign: 'center', alignItems: 'center', color: '#22F0DD'}}
+				placeholder = "First Name"
+				placeholderTextColor = '#22F0DD'
+		        onChangeText = {(text) => {this.setState({firstNameString: text})}}
+			/>
+			<TextInput
+				style={{width: 150, textAlign: 'center', alignItems: 'center', color: '#22F0DD'}}
+				placeholder = "Last Name"
+				placeholderTextColor = '#22F0DD'
+				onChangeText = {(text) => {this.setState({lastNameString: text})}}
+			/>
+			<TextInput
+				style={{width: 150, textAlign: 'center', alignItems: 'center', color: '#22F0DD'}}
+				placeholder = "Email"
+				placeholderTextColor = '#22F0DD'
+				onChangeText = {(text) => {this.setState({emailString: text})}}
+			/>
+			<TouchableElement onPress={this.onPressRegister.bind(this)}>
+				<View style={styles.submitbutton}>
+					<Text style={styles.submittext}>
+					Submit
+					</Text>
+				</View>
+			</TouchableElement>
+		</View>
         <TouchableElement onPress={()=>this.props.onBack()}>
           <View style={styles.eventbutton}>
-            <Text style={styles.submittext}>
-              Back to List of Events
-            </Text>
+			<Image source={require('./arrow.png')}/>
           </View>
         </TouchableElement>
-
-        <Text style={styles.welcome}>
-          Swipe ID or enter manually.
-        </Text>
-
-        <TextInput
-          style={{width: 100, textAlign: 'center', alignItems: 'center'}}
-          secureTextEntry = {true}
-          placeholder = "PUID"
-          placeholderTextColor = "black"
-		      onChangeText = {(text) => {this.setState({puidString: text})}}
-        />
-
-        <Text>
-          And / Or:
-        </Text>
-
-        <TextInput
-          style={{width: 150, textAlign: 'center', alignItems: 'center',}}
-          placeholder = "First Name"
-          placeholderTextColor = "black"
-		      onChangeText = {(text) => {this.setState({firstNameString: text})}}
-        />
-        <TextInput
-          style={{width: 150, textAlign: 'center', alignItems: 'center',}}
-          placeholder = "Last Name"
-          placeholderTextColor = "black"
-		      onChangeText = {(text) => {this.setState({lastNameString: text})}}
-        />
-        <TextInput
-          style={{width: 150, textAlign: 'center', alignItems: 'center',}}
-          placeholder = "Email"
-          placeholderTextColor = "black"
-		      onChangeText = {(text) => {this.setState({emailString: text})}}
-        />
-
-        <TouchableElement onPress={this.onPressRegister.bind(this)}>
-          <View style={styles.submitbutton}>
-            <Text style={styles.submittext}>
-              Submit
-            </Text>
-          </View>
-       </TouchableElement>
       </View>
     );
   }
@@ -138,23 +151,51 @@ onPressRegister() {
 }
 
 const styles = StyleSheet.create({
+  header: {
+	width: 420,
+	height: 200,
+	backgroundColor: 'rgb(33,33,33)',
+  },
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
+    //justifyContent: 'center',
+    //alignItems: 'center',
+    backgroundColor: 'rgb(51,51,51)',
+  },
+  eventTextName: {
+	fontSize: 20,
+	margin: 10,
+	marginRight: 80,
+	color: 'white',
+	marginLeft: 27,
+  },
+  eventTextDesc: {
+	fontSize: 16,
+	color: 'white',
+	textAlign: 'left',
+	margin: 10,
+	marginLeft: 27,
+  },
+  eventTextDate: {
+	fontSize: 16,
+	color: 'white',
+	textAlign: 'right',
+	right: 10,
   },
   eventbutton: {
     margin: 15,
     alignItems: 'center',
-    width: 200,
+	justifyContent: 'center',
+    width: 30,
     height: 30,
-    borderColor: 'black',
-    borderWidth: 1,
+	top: 5,
+	left: 5,
+	position: 'absolute',
+	backgroundColor: 'rgb(33,33,33)',
   },
   welcome: {
-    color: 'black',
+    color: 'rgb(38,195,180)',
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
@@ -169,14 +210,30 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   submitbutton: {
-    margin: 15,
+    margin: 5,
     alignItems: 'center',
     width: 80,
-    height: 40,
-    borderColor: 'black',
-    borderWidth: 1,
+    height: 30,
+	backgroundColor: '#22F0DD',
+	justifyContent: 'center',
   },
   submittext: {
     color: 'black',
   },
+  backgroundPic: {
+	height: 350,
+	width: 490,
+	position: 'absolute',
+	bottom: -10,
+	left: -165,
+  },
+  floatingBox: {
+	position: 'absolute',
+	height: 360,
+	top: 160,
+	left: 25,
+	right: 25,
+	backgroundColor: 'rgb(80,80,80)',
+	alignItems: 'center',
+  }
 })

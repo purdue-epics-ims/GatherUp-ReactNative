@@ -8,7 +8,8 @@ import {
   View,
   AppRegistry,
   TextInput,
-  AsyncStorage
+  AsyncStorage,
+  Image
 } from'react-native';
 
 
@@ -42,28 +43,33 @@ export default class LoginFields extends Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome! Please login to continue.
-        </Text>
+	  <Image style={styles.logoPic}
+          source={require('./logo.png')}
+        />
         <TextInput style={styles.input}
-          placeholder = "Login Email"
-          placeholderTextColor = "black"
+          placeholder = "username"
+          placeholderTextColor = '#22F0DD'
+		  underlineColorAndroid= '#22F0DD'
           onChangeText = {(text) => {this.setState({emailString: text}); console.log(text)}}
           />
         <TextInput style={styles.input}
           secureTextEntry = {true}
-          placeholder = "Password"
-          placeholderTextColor = "black"
+          placeholder = "password"
+          placeholderTextColor = '#22F0DD'
+		  underlineColorAndroid= '#22F0DD'
           onChangeText = {(text) => {this.setState({passwordString: text}); console.log(text)}}
         />
 
         <TouchableElement onPress={this.login.bind(this)}>
           <View style={styles.submitbutton}>
             <Text style={styles.submittext}>
-              Submit
+              Log In
             </Text>
           </View>
        </TouchableElement>
+       <Image style={styles.backgroundPic}
+          source={require('./icon.png')}
+        />
       </View>
     );
   }
@@ -89,31 +95,50 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'transparent',
+    backgroundColor: 'rgb(51,51,51)',
   },
   welcome: {
-    color: 'black',
+    color: '#22F0DD',
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-    backgroundColor: 'transparent',
   },
   input: {
-      width: 150,
-      textAlign: 'center',
+      width: 365,
+      textAlign: 'left',
+	  alignSelf: 'center',
       alignItems: 'center',
+	  fontSize: 20,
+	  color: '#22F0DD',
   },
   submitbutton: {
     margin: 15,
     alignItems: 'center',
-    width: 75,
-    height: 30,
-    borderColor: 'black',
+	borderColor: 'rgb(51,51,51)',
     borderWidth: 1,
+	backgroundColor: '#22F0DD',
+	width:150,
+	height:50,
+	justifyContent: 'center',
+    alignItems: 'center',
   },
   submittext: {
-    color: 'black',
+	fontSize: 20,
+	color: 'rgb(51,51,51)',
+  },
+  logoPic: {
+	  height: 160,
+	  width: 160,
+	  margin: 15,
+  },
+  backgroundPic: {
+	  alignSelf: 'stretch',
+      alignItems: 'flex-start',
+	  marginLeft: 95,
+	  position: 'absolute',
+	  bottom: -10,
+	  height: 350,
+	  width: 490,
   },
 })
