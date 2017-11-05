@@ -15,7 +15,7 @@ Event attendance tracker web app for Purdue's Office of International Programs, 
   - Check if you have added the ssh key of your computer to Github, if not, follow [this tutorial to create a new ssh-key](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/) and [this tutorial to add your ssh-key to Github ](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/)
 
 5. cd into GatherUp-ReactNative/Application after you finish cloning
-6. Follow the React-Native website to download and install react-native. If this give you trouble check the links below
+6. Follow the React-Native website (https://facebook.github.io/react-native/docs/getting-started.html) to download and install react-native. If this give you trouble check the links below
 
 7. Type in the following command to download all the libraries for the project with npm:
 
@@ -34,6 +34,7 @@ Event attendance tracker web app for Purdue's Office of International Programs, 
 
 ### Trouble Shooting ###
 - Make sure your environment variables for JAVA_HOME and ANDROID_HOME are set. Using android studio's directories is a solid idea.
+- Try doing npm uninstall react-native and then npm install -g react-native-cli
 - If windows gives you trouble try a linux machine.
 - If linux give you trouble then buy a MAC
 
