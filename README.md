@@ -5,17 +5,17 @@ Event attendance tracker web app for Purdue's Office of International Programs, 
 1. Download the latest Node.js from [here](https://nodejs.org/en/)
 2. Download the latest Git from [here](https://git-scm.com/downloads)
   - If you are Windows user, make sure you check getting git bash while you install
-3. Open up terminal (command line for windows), cd to the directory that you want to store this project
+3. Open up terminal (git bash for windows), cd to the directory that you want to store this project
 4. Type in the following command to clone down the project
 
- `git@github.com:purdue-epics-ims/GatherUp-ReactNative.git`
+ `git clone git@github.com:purdue-epics-ims/GatherUp-ReactNative.git`
 
  If you fail cloning:
   - Check your permission to the project with your team leader
   - Check if you have added the ssh key of your computer to Github, if not, follow [this tutorial to create a new ssh-key](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/) and [this tutorial to add your ssh-key to Github ](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/)
 
 5. cd into GatherUp-ReactNative/Application after you finish cloning
-6. Follow the React-Native website (https://facebook.github.io/react-native/docs/getting-started.html) to download and install react-native. If this give you trouble check the links below
+6. Follow the [React-Native website](https://facebook.github.io/react-native/docs/getting-started.html) to download and install react-native as well as set up your emulator (android studio avd or physical devices). If this gives you trouble check the links below
 
 7. Type in the following command to download all the libraries for the project with npm:
 
@@ -42,6 +42,8 @@ Event attendance tracker web app for Purdue's Office of International Programs, 
 Please add or update more resources listed over time
 
 - Basics:
+  - Bash 
+    - [Resource list for bash navigation](https://whatbox.ca/wiki/Bash_Shell_Commands)
   - Git
     - [15 minutes quick tutorial](https://try.github.io/levels/1/challenges/1)
     - [Beginner tutorial](http://product.hubspot.com/blog/git-and-github-tutorial-for-beginners)
