@@ -3,13 +3,15 @@ import {
   Platform,
   TouchableNativeFeedback,
   TouchableHighlight,
+  TouchableOpacity,
   StyleSheet,
   Text,
   View,
   AppRegistry,
   TextInput,
   AsyncStorage,
-  Image
+  Image,
+  Button
 } from'react-native';
 
 
@@ -59,14 +61,10 @@ export default class LoginFields extends Component {
 		  underlineColorAndroid= '#22F0DD'
           onChangeText = {(text) => {this.setState({passwordString: text}); console.log(text)}}
         />
-
-        <TouchableElement onPress={this.login.bind(this)}>
-          <View style={styles.submitbutton}>
-            <Text style={styles.submittext}>
-              Log In
-            </Text>
-          </View>
-       </TouchableElement>
+		{/*<Button onPress={this.login.bind(this)} title="Log In" color="#22F0DD">
+		</Button>*/}
+		<Button onPress={this.login.bind(this)} title="Log In" color='rgb(102,102,102)'>
+		</Button>
        <Image style={styles.backgroundPic}
           source={require('./icon.png')}
         />
@@ -113,10 +111,7 @@ const styles = StyleSheet.create({
 	  color: '#22F0DD',
   },
   submitbutton: {
-    margin: 15,
     alignItems: 'center',
-	borderColor: 'rgb(51,51,51)',
-    borderWidth: 1,
 	backgroundColor: '#22F0DD',
 	width:150,
 	height:50,
@@ -124,6 +119,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   submittext: {
+	borderWidth: 1,
 	fontSize: 20,
 	color: 'rgb(51,51,51)',
   },
