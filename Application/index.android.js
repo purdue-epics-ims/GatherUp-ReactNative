@@ -11,6 +11,7 @@ import AttendancePage from './src/AttendancePage';
 import LoginFields from './src/LoginPage';
 import EventListPage from './src/EventListPage'
 import * as firebase from 'firebase';
+import UniMagModule from './UniMagModule'
 
 const firebaseConfig = {
   apiKey: "AIzaSyBpBEVFlT7PpcPq3ZA_Yj0U6Lq1vQfvq0c",

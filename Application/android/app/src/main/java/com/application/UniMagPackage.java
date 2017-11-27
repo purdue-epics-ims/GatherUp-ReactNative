@@ -1,7 +1,6 @@
-package edu.purdue.epics.ims.react.modules.toast;
+package com.application;
 
-import com.facebook.react.NativeModule;
-import com.facebook.react.bridge.JavaScriptModule;
+import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
@@ -10,12 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class UniMag implements ReactContextBaseJavaModule{
-
-  @Override
-  public List<Class<? extends JavaScriptModule>> createJSModules() {
-      return Collections.emptyList();
-  }
+public class UniMagPackage implements ReactPackage {
 
   @Override
   public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
@@ -23,10 +17,11 @@ public class UniMag implements ReactContextBaseJavaModule{
   }
 
   @Override
-  public List<NativeModule> createNativeModules( ReactApplicationContext reactContext) {
+  public List<NativeModule> createNativeModules(
+                              ReactApplicationContext reactContext) {
     List<NativeModule> modules = new ArrayList<>();
 
-    modules.add(new ToastModule(reactContext));
+    modules.add(new UniMagModule(reactContext));
 
     return modules;
   }

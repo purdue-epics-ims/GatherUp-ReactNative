@@ -12,10 +12,13 @@ import {
   Image
 } from'react-native';
 
+import UniMagModule from '../UniMagModule'
 
-
+  UniMagModule.increment(9, (r)=>{
+        test = "UniMagModule Works";
+        console.log(r);
+  });
 export default class LoginFields extends Component {
-
   static propTypes = {
     firebaseApp: PT.object.isRequired,
     title: PT.string.isRequired,
