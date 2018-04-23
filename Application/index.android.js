@@ -5,12 +5,14 @@ import {
   Text,
   View
 } from 'react-native';
+
 import { Navigator } from 'react-native-deprecated-custom-components';
 
 import AttendancePage from './src/AttendancePage';
 import LoginFields from './src/LoginPage';
 import EventListPage from './src/EventListPage'
 import * as firebase from 'firebase';
+import {NativeModules} from 'react-native';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBpBEVFlT7PpcPq3ZA_Yj0U6Lq1vQfvq0c",
@@ -40,6 +42,11 @@ class Application extends Component {
       {title: 'Attendance Page', index: 2}
     ];
 
+	console.log("hello");
+	console.log(NativeModules);
+	NativeModules.ToastModule.show('Awesome', NativeModules.ToastModule.SHORT);
+	//console.log(NativeModules.UnimagModule.showString("string"));
+	//NativeModules.UnimagModule.show("show",2000);
     return (
       <Navigator
         initialRoute={routes[0]}
