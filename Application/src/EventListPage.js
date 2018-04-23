@@ -36,8 +36,10 @@ export default class EventListPage extends Component {
 
   renderItem(item) {
 	  console.log("EventListPage")
-	  console.log(item.event)
-    return (
+	  console.log(item.event)  
+  
+	if (item.dateID >= Date.now()){
+    return(
       <TouchableHighlight onPress={()=>this.props.onForwardEvent({id: item._key, name: item.name, event: item.event, dateID: item.dateID, description: item.description})}>
         <View style={eventstyles.EventListBox}>
           <Text style = {eventstyles.eventTextDate}>{moment(item.dateID).format('MM/DD/YYYY')}</Text>
@@ -45,7 +47,9 @@ export default class EventListPage extends Component {
           <Text style = {eventstyles.eventTextDesc}>{item.description}</Text>
         </View>
       </TouchableHighlight>
-    )
+    );
+	}
+	return null;
   }
 
   listenForItems(itemsRef) {
