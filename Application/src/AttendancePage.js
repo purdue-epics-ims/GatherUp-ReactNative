@@ -28,7 +28,7 @@ export default class AttendancePage extends Component {
 	constructor(props) {
     super(props);
 	this.state = {
-		puidString: '0000000000',
+		puidString: '',
 		firstNameString: '',
 		lastNameString: '',
 		emailString: ''
@@ -116,39 +116,68 @@ export default class AttendancePage extends Component {
 
 
 onPressRegister() {
-	 if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.emailString)) {//^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$)) { //Matches email
+	var emailTrue = 0;
+	var puidTrue = 0;
+	var rightFormat = 1;
+	var emailExists = 0;
+	var puidExists = 0;
+	if (this.state.emailString || this.state.puidString) {//^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$)) { //Matches email
 		//TODO: add way to verify added email does not exist in existing emails in firebase (user doesn't exist)
+		if(this.state.emailString) {
+			if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.emailString)) {
+				emailTrue = 1;
+							
+				/*if(snaphot.exists) {
+					alert('Your attendance is already recorded');
+					emailTrue = 0;
+				}  STARTED TRYING TO VERIFY WITH THE DATABASE*/
+			}
+			else {
+				rightFormat = 0;
+				alert('Email is not of a valid format. Please try again.');
+			}
+		}
+		if(this.state.puidString) {
+			if (/^[-+]?[0-9]+$/.test(this.state.puidString) && this.state.puidString.length == 10) {
+				puidTrue = 1;
+			}
+			else {
+				rightFormat = 0;
+				alert('PUID requires 10 digits with no spaces or dashes.');
+			}
+		}
+		if((emailTrue || puidTrue) && rightFormat) {
+			var newPostKey = this.props.firebaseApp.database().ref().child('event').child(this.props.event.id).child('attendees').push().key;
 
-    var newPostKey = this.props.firebaseApp.database().ref().child('event').child(this.props.event.id).child('attendees').push().key;
+			const puidtemp = this.state.puidString.includes('000000000') ? (this.state.emailString.endsWith('purdue.edu') ? '**********' : 'N/A') : (this.state.puidString);
 
-    const puidtemp = this.state.puidString.includes('000000000') ? (this.state.emailString.endsWith('purdue.edu') ? '**********' : 'N/A') : (this.state.puidString);
+			var updates = {
+				puid: puidtemp,
+				lastname: this.state.lastNameString,
+				firstname: this.state.firstNameString,
+				email: this.state.emailString
+			};
 
-    var updates = {
-      puid: puidtemp,
-      lastname: this.state.lastNameString,
-      firstname: this.state.firstNameString,
-      email: this.state.emailString
-    };
+			var path = {};
+			path['/event/' + this.props.event.id + '/' + 'attendees/' + newPostKey] = updates;
 
-    var path = {};
-    path['/event/' + this.props.event.id + '/' + 'attendees/' + newPostKey] = updates;
-
-    this.props.firebaseApp.database().ref().update(path).then((success) =>
-      {
-        alert('Attendance recorded successfully!');
-      }
-      ).catch((error) =>
-      {
-        alert('Attendance submission failed: Firebase update error');
-      });
-
-    }
-    else { //Email is not a valid email format
-		    alert('Email is not of a valid format. Please try again.');
-	  }
-  }
+			this.props.firebaseApp.database().ref().update(path).then((success) =>
+			{
+				alert('Attendance recorded successfully!');
+			}
+			).catch((error) =>
+			{
+				alert('Attendance submission failed: Firebase update error.');
+			});
+		}
+	}
+	else {
+		alert('Please enter either your PUID or email.');
+	}
+}
 
 }
+
 
 const styles = StyleSheet.create({
   header: {
