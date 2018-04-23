@@ -21,7 +21,7 @@ export default class EventListPage extends Component {
     onForwardEvent: PT.func,
     onBack: PT.func,
   }
-
+  
   constructor(props) {
     super(props);
     this.state = {
